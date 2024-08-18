@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import UserContextProvider from './Context/UserContext'
 import './App.css'
 import Home from './components/Home/Home.jsx'
 import Cart from './components/Cart/Cart.jsx'
@@ -12,20 +13,23 @@ import Register from './components/Register/Register.jsx'
 import Wishlist from './components/Wishlist/Wishlist.jsx'
 import Layout from './components/Layout/Layout.jsx'
 import NotFound from './components/NotFound/NotFound.jsx'
+import ForgetPassword from './components/Forget-password/Forget-password.jsx'
+import ProtectedRoute from './components/Protected-Route/Protected-Route.jsx'
 
 function App() {
 
   const routing = createBrowserRouter([
     {
       path: '', element: <Layout></Layout>, children: [
-        { index: true, element: <Home></Home> },
-        { path: '/cart', element: <Cart></Cart> },
-        { path: '/brands', element: <Brands></Brands> },
-        { path: '/categories', element: <Categories></Categories> },
+        { index: true, element: <ProtectedRoute> <Home></Home> </ProtectedRoute> },
+        { path: '/cart', element: <ProtectedRoute> <Cart></Cart> </ProtectedRoute> },
+        { path: '/brands', element: <ProtectedRoute> <Brands></Brands> </ProtectedRoute> },
+        { path: '/categories', element: <ProtectedRoute> <Categories></Categories> </ProtectedRoute> },
+        { path: '/Forget-password', element: <ForgetPassword></ForgetPassword> },
         { path: '/login', element: <Login></Login> },
-        { path: '/products', element: <Products></Products> },
+        { path: '/products', element: <ProtectedRoute> <Products></Products> </ProtectedRoute> },
         { path: '/register', element: <Register></Register> },
-        { path: '/wishlist', element: <Wishlist></Wishlist> },
+        { path: '/wishlist', element: <ProtectedRoute> <Wishlist></Wishlist> </ProtectedRoute> },
         { path: '*', element: <NotFound></NotFound> },
       ]
     }
@@ -33,8 +37,9 @@ function App() {
 
   return (
     <>
-
-      <RouterProvider router={routing}></RouterProvider>
+      <UserContextProvider>
+        <RouterProvider router={routing}></RouterProvider>
+      </UserContextProvider>
 
     </>
   )

@@ -1,5 +1,24 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const userContext = createContext(null)
+export const userContext = createContext()
 
-userContext.Provider
+export default function userContextProvider({children}) {
+
+    const [token, setToken] = useState(localStorage.getItem('token'))
+
+    useEffect(() => {
+      
+        token ? 
+        localStorage.setItem('token', token)
+        : localStorage.removeItem('token');
+
+    }, [token])
+    
+
+    return (
+        <userContext.Provider value={{token, setToken}}>
+            {children}
+        </userContext.Provider>
+    ) 
+
+}

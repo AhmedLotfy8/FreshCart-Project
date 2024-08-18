@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Style from './Login.module.css'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { FaSpinner } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { userContext } from '../../Context/UserContext'
 
 
 export default function Login() {
 
+  const {setToken} = useContext(userContext)
+
   const [errorMessage, setErrorMessage] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingButton, setIsLoadingButton] = useState(false)
   const navigate = useNavigate();
 
   const schema = Yup.object().shape({
@@ -34,14 +37,14 @@ export default function Login() {
 
   async function handleSubmit(values) {
 
-    setIsLoading(true);
+    setIsLoadingButton(true);
 
     try {
       const {data} = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', values)
 
       if (data.message == "success") {   
-        console.log(data.token);
         navigate('/');
+        setToken(data.token)
       }
 
     }
@@ -51,7 +54,7 @@ export default function Login() {
     }
 
     finally {
-      setIsLoading(false);
+      setIsLoadingButton(false);
     }
 
 
@@ -97,10 +100,13 @@ export default function Login() {
 
               </div>
 
-              <div className='flex justify-end'>
+              <div className='flex justify-between'>
+
+                  <NavLink to="/forget-password" tabindex="-1" className="dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 hover:text-green-700">Forget password?</NavLink>
+
                 <button
-                  disabled={isLoading} type="submit" class="text-white disabled:bg-green-200 disabled:text-gray-500 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                  {isLoading ?
+                  disabled={isLoadingButton} type="submit" class="text-white disabled:bg-green-200 disabled:text-gray-500 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                  {isLoadingButton ?
                     <FaSpinner className='animate-spin'></FaSpinner>
                     : "Login now"}
 

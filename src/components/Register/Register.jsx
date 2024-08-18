@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Style from './Register.module.css'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { FaSpinner } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import { userContext } from '../../Context/UserContext'
 
 
 export default function Register() {
 
+  const {setToken} = useContext(userContext);
+
   const [errorMessage, setErrorMessage] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingButton, setIsLoadingButton] = useState(false)
   const navigate = useNavigate();
 
   const schema = Yup.object().shape({
@@ -41,13 +44,14 @@ export default function Register() {
 
   async function handleSubmit(values) {
 
-    setIsLoading(true);
+    setIsLoadingButton(true);
 
     try {
       const {data} = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup', values)
 
       if (data.message == "success") {        
-        navigate('/login');
+        navigate('/home');
+        setToken(data.token);
       }
 
     }
@@ -57,7 +61,7 @@ export default function Register() {
     }
 
     finally {
-      setIsLoading(false);
+      setIsLoadingButton(false);
     }
 
 
@@ -140,9 +144,9 @@ export default function Register() {
               </div>
 
               <div className='flex justify-end'>
-                <button
-                  disabled={isLoading} type="submit" class="text-white disabled:bg-green-200 disabled:text-gray-500 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                  {isLoading ?
+                <button 
+                  disabled={isLoadingButton} type="submit" class="text-white disabled:bg-green-200 disabled:text-gray-500 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                  {isLoadingButton ?
                     <FaSpinner className='animate-spin'></FaSpinner>
                     : "Register now"}
 
