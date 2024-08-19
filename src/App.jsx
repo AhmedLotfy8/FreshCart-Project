@@ -15,6 +15,7 @@ import Layout from './components/Layout/Layout.jsx'
 import NotFound from './components/NotFound/NotFound.jsx'
 import ForgetPassword from './components/Forget-password/Forget-password.jsx'
 import ProtectedRoute from './components/Protected-Route/Protected-Route.jsx'
+import ProductDetails from './components/ProductDetails/ProductDetails.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         { path: '/Forget-password', element: <ForgetPassword></ForgetPassword> },
         { path: '/login', element: <Login></Login> },
         { path: '/products', element: <ProtectedRoute> <Products></Products> </ProtectedRoute> },
+        { path: '/productdetails/:id', element: <ProtectedRoute> <ProductDetails></ProductDetails> </ProtectedRoute> },
         { path: '/register', element: <Register></Register> },
         { path: '/wishlist', element: <ProtectedRoute> <Wishlist></Wishlist> </ProtectedRoute> },
         { path: '*', element: <NotFound></NotFound> },

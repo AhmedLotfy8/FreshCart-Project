@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Style from './Cart.module.css'
+import Style from './MainSlider.module.css'
 
-export default function Cart() {
+export default function MainSlider() {
 
   const [count, setCount] = useState(0)
 
@@ -15,7 +15,7 @@ export default function Cart() {
 
   return (
     <>
-      <h1 className='pt-52'>Cart</h1>
+      <h1>MainSlider</h1>
       <p>Lorem ipsum dolor sit amet.</p>
     </>
   )

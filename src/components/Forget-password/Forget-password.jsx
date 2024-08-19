@@ -56,7 +56,7 @@ export default function ForgetPassword() {
 
   return (
     <>
-      <div className='container max-w-6xl mx-auto py-10'>
+      <div className='container max-w-6xl mx-auto py-32'>
         <h1 className='font-normal dark:text-white mb-5'>Please enter your verification code</h1>
 
         {errorMessage ?

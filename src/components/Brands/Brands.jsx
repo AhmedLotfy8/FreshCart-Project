@@ -10,49 +10,67 @@ export default function Brands() {
 
     try {
       const response = await axios.get('https://ecommerce.routemisr.com/api/v1/brands')
-      
-      setBrands(response.data.data)      
+
+      setBrands(response.data.data)
     }
 
-    catch(error) {
+    catch (error) {
       console.log(error);
     }
 
   }
 
-  getBrands()
+  useEffect(() => {
+
+    getBrands();
+
+  }, [])
+
+  useEffect(() => {
+
+    console.log(brands);
+
+
+  }, [brands])
+
 
   return (
     <>
 
       <div className="container mx-auto max-w-6xl py-5">
 
-        <h1 className='text-green-600 text-center'>All Brands</h1>
+        <h1 className='text-green-600 text-center font-semibold'>All Brands</h1>
 
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-4 py-12 text-center'>
 
-          <div>
-            <h2> heelow</h2>
-            {/* <div>
-              <img src={brands[0].image} alt="" />
-            </div> */}
-{/* 
-            <div>
-              <p>{brands[0].name}</p>
-            </div> */}
+        <div className='py-32'>
 
-          </div>
+          <div className='container max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-7'>
 
-          <div>
-            <h2> heelow</h2>
-          </div>
+            {/* +++++++++++++++++++++++++++++++++++++++++++++++++++ Loading */}
+            {brands.length == 0 ? <div className='text-red-600'>Loading</div> :
 
-          <div>
-            <h2> heelow</h2>
-          </div>
+              brands.map(function (bad) {
 
-          <div>
-            <h2> heelow</h2>
+                return <>
+
+                  <div className={`${Style.brand} rounded-lg border border-gray-200 cursor-pointer`}>
+
+                    <div className='bg-cover'>
+                      <img src={bad.image} className=' w-full object-cover rounded-t-md' alt="" />
+                    </div>
+
+                    <div className='py-3'>
+                      <h3 className='text-green-600 dark:text-green-500 font-semibold text-center'>{bad.name}</h3>
+                    </div>
+
+                  </div>
+
+                </>
+
+              })
+
+            }
+
           </div>
 
         </div>

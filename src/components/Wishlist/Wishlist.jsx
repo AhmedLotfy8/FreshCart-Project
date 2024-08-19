@@ -15,7 +15,7 @@ export default function Wishlist() {
 
   return (
     <>
-      <h1>Wishlist</h1>
+      <h1 className='pt-52'>Wishlist</h1>
       <p>Lorem ipsum dolor sit amet.</p>
     </>
   )

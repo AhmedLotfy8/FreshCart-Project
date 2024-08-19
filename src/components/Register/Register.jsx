@@ -69,7 +69,7 @@ export default function Register() {
 
   return (
     <>
-      <div className='container max-w-6xl mx-auto py-10'>
+      <div className='container max-w-6xl mx-auto py-32'>
 
         <div className='flex flex-col'>
           <h1 className='font-normal dark:text-white mb-5'>Register now: </h1>

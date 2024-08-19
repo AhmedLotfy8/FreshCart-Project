@@ -62,7 +62,7 @@ export default function Login() {
 
   return (
     <>
-      <div className='container max-w-6xl mx-auto py-10'>
+      <div className='container max-w-6xl mx-auto py-32'>
 
         <div className='flex flex-col'>
           <h1 className='font-normal dark:text-white mb-5'>Login now: </h1>
@@ -74,11 +74,11 @@ export default function Login() {
 
           <div className='py-3'>
 
-            <form onSubmit={formik.handleSubmit} class="mx-auto">
+            <form onSubmit={formik.handleSubmit} className="mx-auto">
 
-              <div class="mb-5">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              <div className="mb-5">
+                <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <input type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                   {...formik.getFieldProps('email')} />
 
                 {formik.errors.email && formik.touched.email
@@ -88,9 +88,9 @@ export default function Login() {
 
               </div>
 
-              <div class="mb-5">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              <div className="mb-5">
+                <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                <input type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                   {...formik.getFieldProps('password')} />
 
                 {formik.errors.password && formik.touched.password
