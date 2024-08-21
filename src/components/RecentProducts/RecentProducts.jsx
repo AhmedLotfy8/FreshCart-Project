@@ -34,6 +34,7 @@ export default function RecentProducts() {
   }, [])
 
 
+  // ********* Loading ********
   if (isLoadingScreen) {
     return <>
 

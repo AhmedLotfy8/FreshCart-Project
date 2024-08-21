@@ -8,7 +8,7 @@ export default function ProductItem({ products }) {
   return (
     <>
     
-      <Link to={`/productdetails/ ${products._id}`}>
+      <Link to={`/productdetails/${products._id}`}>
         <div className={`${Style.product} p-3 rounded-lg`}>
           <img src={products.imageCover} className='' alt="" />
 
