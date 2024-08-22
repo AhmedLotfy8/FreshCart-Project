@@ -11,10 +11,11 @@ export default function Home() {
 
   return (
     <>
-
-      <MainSlider></MainSlider>
-      <CategorySlider></CategorySlider>
-      <RecentProducts></RecentProducts>
+      <div className='py-24'>
+        <MainSlider></MainSlider>
+        <CategorySlider></CategorySlider>
+        <RecentProducts></RecentProducts>
+      </div>
 
     </>
   )

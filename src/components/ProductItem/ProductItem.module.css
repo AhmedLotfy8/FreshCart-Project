@@ -5,3 +5,14 @@
 .product:hover {
     box-shadow: 1px 1px 10px #4fa74f !important;
 }
+
+.floatButton {
+    transform: translateY(100%);
+    transition: 0.3s !important;
+    opacity: 0;
+}
+
+.product:hover .floatButton {
+    transform: translateY(0);
+    opacity: 1;
+}

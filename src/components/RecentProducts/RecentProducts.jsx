@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Style from './RecentProducts.module.css'
 import axios from 'axios'
-
 import ProductItem from '../ProductItem/ProductItem';
+import Loading from '../Loading/Loading';
 
 export default function RecentProducts() {
 
@@ -34,18 +34,19 @@ export default function RecentProducts() {
   }, [])
 
 
-  // ********* Loading ********
   if (isLoadingScreen) {
     return <>
 
-      <h1 className='text-red-600 pt-72'>Loading...</h1>
+      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <Loading></Loading>
+      </div>
 
     </>
   }
 
   return (
 
-    <div className='py-32'>
+    <div className='py-8'>
 
       <div class="my-10 mx-auto max-w-4xl">
         <input type="text" id="productsNameHome" placeholder='Search'
