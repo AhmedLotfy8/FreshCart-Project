@@ -1,0 +1,7 @@
+.subCategoryItem {
+    transition: 0.3s !important;
+}
+
+.subCategoryItem:hover {
+    box-shadow: 1px 1px 10px #4fa74f !important;
+}

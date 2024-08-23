@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Style from './Categories.module.css'
 import axios from 'axios'
 import Loading from '../Loading/Loading'
+import SubCategory from '../SubCategory/SubCategory'
 
 export default function Categories() {
 
   const [isLoadingScreen, setIsLoadingScreen] = useState(false)
   const [categories, setCategories] = useState([])
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [selectedCategoryName, setSelectedCategoryName] = useState(null);
 
   async function getCategories() {
 
@@ -32,6 +35,7 @@ export default function Categories() {
 
   }, [])
 
+
   if (isLoadingScreen) {
     return <>
 
@@ -53,7 +57,10 @@ export default function Categories() {
 
             return <>
 
-              <div className={`${Style.category} rounded-lg border border-gray-200 cursor-pointer`}>
+              <div onClick={() => {
+                setSelectedCategoryId(cat._id); setSelectedCategoryName(cat.name);
+
+              }} className={`${Style.category} rounded-lg border border-gray-200 cursor-pointer`}>
 
                 <div className='bg-cover'>
                   <img src={cat.image} className='h-72 w-full object-cover rounded-t-md' alt="" />
@@ -71,8 +78,9 @@ export default function Categories() {
 
         </div>
 
-      </div>
+        {selectedCategoryId ? <SubCategory categoryId={selectedCategoryId} categoryName={selectedCategoryName}></SubCategory> : <></>}
 
+      </div>
 
     </>
   )

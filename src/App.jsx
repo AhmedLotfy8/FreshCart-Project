@@ -16,6 +16,7 @@ import NotFound from './components/NotFound/NotFound.jsx'
 import ForgetPassword from './components/Forget-password/Forget-password.jsx'
 import ProtectedRoute from './components/Protected-Route/Protected-Route.jsx'
 import ProductDetails from './components/ProductDetails/ProductDetails.jsx'
+import CartContextProvider from './Context/CartContext.jsx'
 
 function App() {
 
@@ -40,7 +41,9 @@ function App() {
   return (
     <>
       <UserContextProvider>
-        <RouterProvider router={routing}></RouterProvider>
+        <CartContextProvider>
+          <RouterProvider router={routing}></RouterProvider>
+        </CartContextProvider>
       </UserContextProvider>
 
     </>

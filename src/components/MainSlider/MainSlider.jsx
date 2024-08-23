@@ -13,8 +13,10 @@ export default function MainSlider() {
   const settings = {
     infinite: true,
     speed: 500,
+    autoplay: true,
     dots: true,
     arrows: false,
+
     customPaging: (i) => (
       <div
         style={{

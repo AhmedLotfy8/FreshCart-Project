@@ -62,7 +62,8 @@ export default function Login() {
 
   return (
     <>
-      <div className='container max-w-6xl mx-auto py-32'>
+      <div className='container max-w-6xl mx-auto py-32
+      '>
 
         <div className='flex flex-col'>
           <h1 className='font-normal dark:text-white mb-5'>Login now: </h1>

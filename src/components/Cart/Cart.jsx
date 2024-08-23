@@ -10,7 +10,8 @@ export default function Cart() {
 
         <div class="my-10 mx-auto max-w-6xl bg-gray-100 dark:bg-slate-800 p-10">
 
-          {/* <div>
+          {/* Empty cart */}
+          {/* <div> 
             <h2 className='font-semibold dark:text-white pb-6'>Cart Shop</h2>
             <h2 className='font-semibold dark:text-white'>Your cart is empty</h2>
           </div> */}
@@ -32,6 +33,10 @@ export default function Cart() {
             <CartProduct></CartProduct>
             <CartProduct></CartProduct>
 
+          </div>
+
+          <div className='text-center mt-5'>
+            <button type="button" className="text-red-600 hover:text-white border border-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Clear Your Cart</button>
           </div>
 
         </div >

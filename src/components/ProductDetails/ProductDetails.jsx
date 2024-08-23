@@ -3,6 +3,8 @@ import Style from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaHeart, FaStar } from 'react-icons/fa';
+import Slider from 'react-slick';
+import Loading from '../Loading/Loading';
 
 export default function ProductDetails() {
 
@@ -15,12 +17,8 @@ export default function ProductDetails() {
 
     try {
       setIsLoadingScreen(true);
-
       const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
       setProductsDetials(data.data)
-
-      console.log(data.data);
-
     }
 
     catch (error) {
@@ -39,10 +37,33 @@ export default function ProductDetails() {
 
   }, [])
 
+  const settings = {
+    infinite: true,
+    speed: 500,
+    dots: true,
+    arrows: false,
+    customPaging: (i) => (
+      <div
+        style={{
+          marginTop: "20px",
+          width: "10px",
+          height: "10px",
+          borderRadius: "50%",
+          backgroundColor: "gray",
+        }}
+      ></div>
+    ),
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   if (isLoadingScreen) {
     return <>
-      <h1 className='pt-72 text-cyan-800'>loading</h1>
+
+      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <Loading></Loading>
+      </div>
+    
     </>
   }
 
@@ -52,7 +73,15 @@ export default function ProductDetails() {
 
         <div className='col-span-4 py-5'>
           {productDetails.images &&
-            (<img src={productDetails.images[0]} alt="" />)
+
+            <Slider {...settings}>
+              {productDetails.images.map((image, index) => (
+                <div key={index}>
+                  <img src={image} alt={`Product Image ${index + 1}`} />
+                </div>
+              ))}
+            </Slider>
+
           }
         </div>
 
@@ -66,12 +95,12 @@ export default function ProductDetails() {
               <FaStar className='text-orange-400'></FaStar>
               <p className='dark:text-white'>{productDetails.ratingsAverage}</p>
             </div>
-            </div>
+          </div>
 
-            <div className='flex justify-between items-center py-3'>
-              <button type="button" className="w-11/12 focus:outline-none text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">+ Add</button>
-              <FaHeart className='mb-2 text-black dark:text-white hover:text-green-600 dark:hover:text-green-500 cursor-pointer text-2xl'></FaHeart>
-            </div>
+          <div className='flex justify-between items-center py-3'>
+            <button type="button" className="w-11/12 focus:outline-none text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">+ Add</button>
+            <FaHeart className='mb-2 text-black dark:text-white hover:text-green-600 dark:hover:text-green-500 cursor-pointer text-2xl'></FaHeart>
+          </div>
 
         </div>
 
