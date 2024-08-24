@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Style from './ProductDetails.module.css'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaHeart, FaStar } from 'react-icons/fa';
 import Slider from 'react-slick';
 import Loading from '../Loading/Loading';
+import { CartContext } from '../../Context/CartContext';
 
 export default function ProductDetails() {
 
@@ -12,6 +13,17 @@ export default function ProductDetails() {
   const [productDetails, setProductsDetials] = useState([])
 
   const { id } = useParams()
+
+
+  const { addItemToCart } = useContext(CartContext);
+  async function addItem(id) {
+    const response = await addItemToCart(id)
+    
+    if (response.data.status == "success") {
+      alert('hey')
+    }
+
+  }
 
   async function getProductDetails(id) {
 
@@ -98,7 +110,7 @@ export default function ProductDetails() {
           </div>
 
           <div className='flex justify-between items-center py-3'>
-            <button type="button" className="w-11/12 focus:outline-none text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">+ Add</button>
+            <button onClick={ () => addItem(productDetails._id)} type="button" className="w-11/12 focus:outline-none text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">+ Add</button>
             <FaHeart className='mb-2 text-black dark:text-white hover:text-green-600 dark:hover:text-green-500 cursor-pointer text-2xl'></FaHeart>
           </div>
 
