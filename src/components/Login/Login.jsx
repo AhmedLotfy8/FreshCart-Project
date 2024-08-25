@@ -106,7 +106,7 @@ export default function Login() {
                   <NavLink to="/forget-password" tabindex="-1" className="dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 hover:text-green-700">Forget password?</NavLink>
 
                 <button
-                  disabled={isLoadingButton} type="submit" class="text-white disabled:bg-green-200 disabled:text-gray-500 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                  disabled={isLoadingButton} type="submit" className="text-white disabled:bg-green-200 disabled:text-gray-500 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                   {isLoadingButton ?
                     <FaSpinner className='animate-spin'></FaSpinner>
                     : "Login now"}

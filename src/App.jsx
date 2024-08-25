@@ -1,12 +1,11 @@
-import { useState } from 'react'
-
 import UserContextProvider from './Context/UserContext'
 import './App.css'
-import Home from './components/Home/Home.jsx'
-import Cart from './components/Cart/Cart.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Categories from './components/Categories/Categories.jsx'
+import Home from './components/Home/Home.jsx'
 import Brands from './components/Brands/Brands.jsx'
+import Cart from './components/Cart/Cart.jsx'
+import Categories from './components/Categories/Categories.jsx'
+import Checkout from './components/Checkout/Checkout.jsx'
 import Login from './components/Login/Login.jsx'
 import Products from './components/Products/Products.jsx'
 import Register from './components/Register/Register.jsx'
@@ -17,6 +16,9 @@ import ForgetPassword from './components/Forget-password/Forget-password.jsx'
 import ProtectedRoute from './components/Protected-Route/Protected-Route.jsx'
 import ProductDetails from './components/ProductDetails/ProductDetails.jsx'
 import CartContextProvider from './Context/CartContext.jsx'
+import toast, { Toaster } from 'react-hot-toast';
+import AllOrders from './components/AllOrders/AllOrders.jsx'
+
 
 function App() {
 
@@ -24,9 +26,11 @@ function App() {
     {
       path: '', element: <Layout></Layout>, children: [
         { index: true, element: <ProtectedRoute> <Home></Home> </ProtectedRoute> },
-        { path: '/cart', element: <ProtectedRoute> <Cart></Cart> </ProtectedRoute> },
+        { path: '/allorders', element: <ProtectedRoute> <AllOrders></AllOrders> </ProtectedRoute> },
         { path: '/brands', element: <ProtectedRoute> <Brands></Brands> </ProtectedRoute> },
+        { path: '/cart', element: <ProtectedRoute> <Cart></Cart> </ProtectedRoute> },
         { path: '/categories', element: <ProtectedRoute> <Categories></Categories> </ProtectedRoute> },
+        { path: '/checkout/:cartId', element: <ProtectedRoute> <Checkout></Checkout> </ProtectedRoute> },
         { path: '/Forget-password', element: <ForgetPassword></ForgetPassword> },
         { path: '/login', element: <Login></Login> },
         { path: '/products', element: <ProtectedRoute> <Products></Products> </ProtectedRoute> },
@@ -45,6 +49,7 @@ function App() {
           <RouterProvider router={routing}></RouterProvider>
         </CartContextProvider>
       </UserContextProvider>
+      <Toaster />
 
     </>
   )

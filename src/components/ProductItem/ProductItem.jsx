@@ -3,6 +3,7 @@ import Style from './ProductItem.module.css'
 import { Link } from 'react-router-dom'
 import { FaHeart, FaStar } from 'react-icons/fa'
 import { CartContext } from '../../Context/CartContext'
+import toast from 'react-hot-toast'
 
 export default function ProductItem({ products }) {
 
@@ -12,7 +13,11 @@ export default function ProductItem({ products }) {
     const response = await addItemToCart(id)
     
     if (response.data.status == "success") {
-      alert('hey')
+
+      toast.success('Added', {
+        position: "top-right",
+      })
+
     }
 
   }

@@ -11,7 +11,7 @@ import { CartContext } from '../../Context/CartContext';
 export default function Navbar() {
 
   const { token, setToken } = useContext(userContext);
-  const { cartItemsNumber } = useContext(CartContext);
+  const { cartItemsNumber } = useContext(CartContext);  
 
   return (
     <>
