@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Style from './NotFound.module.css'
 import { Link } from 'react-router-dom'
+import Modal from '../Modal/Modal'
 
 export default function NotFound() {
 
@@ -31,6 +32,7 @@ export default function NotFound() {
         </div>
 
       </div>
+
     </>
   )
 }

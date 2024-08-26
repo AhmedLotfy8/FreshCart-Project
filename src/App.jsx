@@ -18,6 +18,9 @@ import ProductDetails from './components/ProductDetails/ProductDetails.jsx'
 import CartContextProvider from './Context/CartContext.jsx'
 import toast, { Toaster } from 'react-hot-toast';
 import AllOrders from './components/AllOrders/AllOrders.jsx'
+import WishlistContextProvider from './Context/WishlistContext.jsx'
+import VerifyCode from './components/VerifyCode/VerifyCode.jsx'
+import ResetPassword from './components/Reset-password/Reset-password.jsx'
 
 
 function App() {
@@ -36,6 +39,8 @@ function App() {
         { path: '/products', element: <ProtectedRoute> <Products></Products> </ProtectedRoute> },
         { path: '/productdetails/:id', element: <ProtectedRoute> <ProductDetails></ProductDetails> </ProtectedRoute> },
         { path: '/register', element: <Register></Register> },
+        { path: '/reset-password', element: <ResetPassword></ResetPassword> },
+        { path: '/verifycode', element: <VerifyCode></VerifyCode> },
         { path: '/wishlist', element: <ProtectedRoute> <Wishlist></Wishlist> </ProtectedRoute> },
         { path: '*', element: <NotFound></NotFound> },
       ]
@@ -45,9 +50,11 @@ function App() {
   return (
     <>
       <UserContextProvider>
-        <CartContextProvider>
-          <RouterProvider router={routing}></RouterProvider>
-        </CartContextProvider>
+        <WishlistContextProvider>
+          <CartContextProvider>
+            <RouterProvider router={routing}></RouterProvider>
+          </CartContextProvider>
+        </WishlistContextProvider>
       </UserContextProvider>
       <Toaster />
 

@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom'
 import { FaHeart, FaStar } from 'react-icons/fa'
 import { CartContext } from '../../Context/CartContext'
 import toast from 'react-hot-toast'
+import { WishlistContext } from '../../Context/WishlistContext'
 
 export default function ProductItem({ products }) {
 
   const { addItemToCart } = useContext(CartContext);
+  const { addItemToWishlist } = useContext(WishlistContext);
 
   async function addItem(id) {
     const response = await addItemToCart(id)
-    
+
     if (response.data.status == "success") {
 
       toast.success('Added', {
@@ -22,11 +24,27 @@ export default function ProductItem({ products }) {
 
   }
 
+  async function addItemWishlist(id) {
+    const response = await addItemToWishlist(id)
+
+    if (response.data.status == "success") {
+
+      toast.success('Liked', {
+        position: "top-right",
+      })
+
+    }
+
+  }
+
   return (
-    <div>
+
+    <div className={`${Style.product} py-2 px-3 rounded-lg`}>
       <Link to={`/productdetails/${products._id}`}>
-        <div className={`${Style.product} p-3 rounded-lg`}>
-          <img src={products.imageCover} className='' alt="" />
+
+        <>
+
+          <img src={products.imageCover} alt="" />
 
           <div className='px-1'>
             <h3 className='text-green-600 dark:text-green-500 text-sm font-normal text-left'>{products.category.name.split(' ').slice(0, 2).join(' ')}</h3>
@@ -42,22 +60,22 @@ export default function ProductItem({ products }) {
 
             </div>
 
-            <div className='flex justify-end items-center pe-4'>
-              <FaHeart className='text-black dark:text-white hover:text-green-600 dark:hover:text-green-500 text-2xl cursor-pointer'></FaHeart>
-            </div>
-
           </div>
 
-
-
-        </div>
+        </>
       </Link>
 
-      {/* <div onClick={hi()} className={`${Style.floatButton} relative bottom-0 left-0 right-0 mb-4 flex justify-center transition-transform duration-300 ease-in-out`}> */}
-      <button onClick={() => addItem(products._id)} className="bg-green-600 hover:bg-green-700 dark:hover:bg-green-500 text-white px-8 py-2 rounded-lg cursor-pointer">Add +</button>
-      {/* </div> */}
+      <div className={` ${Style.floatButton} flex justify-between items-center`}>
 
-    </div>
+        <button onClick={() => addItem(products._id)} className={` bg-green-600 hover:bg-green-700 dark:hover:bg-green-500 text-white px-8 py-2 rounded-lg cursor-pointer`}>Add +</button>
+
+        <div onClick={() => addItemWishlist(products._id)} className='flex justify-end items-center pe-4'>
+          <FaHeart className='text-black dark:text-white hover:text-green-600 dark:hover:text-green-500 text-2xl cursor-pointer'></FaHeart>
+        </div>
+
+      </div>
+
+    </div >
   )
 }
 

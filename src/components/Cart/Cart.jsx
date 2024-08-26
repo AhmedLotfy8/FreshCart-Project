@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Style from './Cart.module.css'
-import CartProduct from '../CartProduct/CartProduct'
-import { CartContext } from '../../Context/CartContext'
-import Loading from '../Loading/Loading'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import Loading from '../Loading/Loading'
+import CartProduct from '../CartProduct/CartProduct'
+import { CartContext } from '../../Context/CartContext'
 
 export default function Cart() {
 
@@ -17,6 +17,7 @@ export default function Cart() {
   async function getLoggedUserCart() {
 
     try {
+      setIsLoadingScreen(true)
       const response = await getUserCart();
       const DATA = response.data.data;
 
@@ -24,12 +25,14 @@ export default function Cart() {
       setCartDataProducts(DATA.products)
       setCartItemsNumber(response.data.numOfCartItems)
 
-      console.log(DATA);
-      
     }
 
     catch (err) {
       console.log(err);
+    }
+
+    finally {
+      setIsLoadingScreen(false);
     }
 
   }

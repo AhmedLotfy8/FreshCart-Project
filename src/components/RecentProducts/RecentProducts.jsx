@@ -55,7 +55,7 @@ export default function RecentProducts() {
 
       </div>
 
-      <div className='container max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-10'>
+      <div className='container max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-7'>
         {products.map((p) => <ProductItem key={p._id} products={p} />)}
 
       </div>

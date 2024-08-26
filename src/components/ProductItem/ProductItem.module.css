@@ -13,6 +13,6 @@
 }
 
 .product:hover .floatButton {
-    transform: translateY(0);
+    transform: translateY(0%);
     opacity: 1;
 }

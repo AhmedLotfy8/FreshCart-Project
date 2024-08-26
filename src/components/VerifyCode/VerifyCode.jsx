@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Style from './Forget-Password.module.css'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import axios from 'axios'
-import { FaSpinner } from 'react-icons/fa'
+import React, { useEffect, useState } from 'react'
+import Style from './VerifyCode.module.css'
 import { useNavigate } from 'react-router-dom'
+import { Formik, useFormik } from 'formik'
+import * as Yup from 'yup'
 
 
-export default function ForgetPassword() {
+export default function VerifyCode() {
 
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
@@ -15,13 +13,13 @@ export default function ForgetPassword() {
   const navigate = useNavigate();
 
   const schema = Yup.object().shape({
-    email: Yup.string().required("Email is required").email(),
+    code: Yup.string().required("Code is required").min(6).max(6),
   })
 
   const formik = useFormik({
 
     initialValues: {
-      email: "",
+      code: "",
     },
 
     onSubmit: handleSubmit,
@@ -37,17 +35,21 @@ export default function ForgetPassword() {
     setIsLoadingButton(true);
 
     try {
-      const { data } = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords', values)
-
+      console.log("hey");
       
-      if (data.statusMsg == "success") {
-        navigate('/verifycode')
+      const response = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode', values )
+      
+      console.log(response);
+
+
+      if (response.status == "Success") {
+        navigate('/register')
       }
 
     }
 
     catch (error) {
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error.response);
     }
 
     finally {
@@ -59,7 +61,7 @@ export default function ForgetPassword() {
   return (
     <>
       <div className='container max-w-6xl mx-auto py-32'>
-        <h1 className='font-normal dark:text-white mb-5'>Please enter your email</h1>
+        <h1 className='font-normal dark:text-white mb-5'>Please enter your verification code</h1>
 
         {errorMessage ?
           <div className="p-4 mb-4 text-sm text-red-500 rounded-lg bg-red-100 dark:bg-gray-800 dark:text-red-400" role="alert"> <span className="font-medium">{errorMessage}</span>  </div>
@@ -67,19 +69,19 @@ export default function ForgetPassword() {
 
         {successMessage ?
           <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert"> <span class="font-medium">{successMessage}</span> </div>
-        : <></>}
+          : <></>}
 
         <div className='py-3'>
           <form onSubmit={formik.handleSubmit} class="mx-auto">
 
             <div class="mb-5">
-              <label htmlFor="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-              <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                {...formik.getFieldProps('email')} />
+              <label htmlFor="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your code</label>
+              <input type="tel" id="code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                {...formik.getFieldProps('code')} />
 
-              {formik.errors.email && formik.touched.email
+              {formik.errors.code && formik.touched.code
                 ? <div className="p-4 mb-4 text-sm text-red-500 rounded-lg bg-red-100 dark:bg-gray-800 dark:text-red-400" role="alert">
-                  <span className="font-medium"></span> {formik.errors.email} </div>
+                  <span className="font-medium"></span> {formik.errors.code} </div>
                 : <></>}
 
             </div>
@@ -99,8 +101,8 @@ export default function ForgetPassword() {
 
         </div>
 
-
       </div>
     </>
   )
 }
+
